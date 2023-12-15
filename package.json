@@ -1,5 +1,5 @@
 {
-  "name": "react-trello",
+  "name": "@ObeoNetwork/react-trello",
   "version": "2.4.1",
   "description": "Pluggable components to add a trello like kanban board to your application",
   "main": "dist/index.js",
@@ -21,9 +21,9 @@
     "format": "pretty-quick \"src/**/*.js\"",
     "size": "size-limit"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rcdexta/react-trello"
+  "repository": "@ObeoNetwork/react-trello",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "react",
@@ -32,10 +32,6 @@
   ],
   "author": "RC, Prakash",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rcdexta/react-trello/issues"
-  },
-  "homepage": "https://github.com/rcdexta/react-trello",
   "dependencies": {
     "autosize": "^4.0.2",
     "classnames": "^2.2.6",
