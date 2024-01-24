@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import isEqual from 'lodash/isEqual'
 import cloneDeep from 'lodash/cloneDeep'
-import pick from 'lodash/pick'
+import isEqual from 'lodash/isEqual'
+import PropTypes from 'prop-types'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import uuidv1 from 'uuid/v1'
 
 import Container from 'rt/dnd/Container'
@@ -47,7 +46,7 @@ class Lane extends Component {
   sortCards(cards, sortFunction) {
     if (!cards) return []
     if (!sortFunction) return cards
-    return cards.concat().sort(function (card1, card2) {
+    return cards.concat().sort(function(card1, card2) {
       return sortFunction(card1, card2)
     })
   }
@@ -190,7 +189,7 @@ class Lane extends Component {
     })
 
     return (
-      <components.ScrollableLane ref={this.laneDidMount} isDraggingOver={isDraggingOver}>
+      <components.ScrollableLane ref={this.laneDidMount}>
         <Container
           orientation="vertical"
           groupName={this.groupName}
@@ -256,6 +255,21 @@ class Lane extends Component {
       onLaneUpdate,
       onCardUpdate,
       onCardMoveAcrossLanes,
+      handleDragStart,
+      handleDragEnd,
+      hideCardDeleteIcon,
+      cardDraggable,
+      cardDragClass,
+      boardId,
+      getCardDetails,
+      labelStyle,
+      currentPage,
+      laneDraggable,
+      canAddLanes,
+      titleStyle,
+      t,
+      droppable,
+      editable,
       ...otherProps
     } = this.props
     const allClassNames = classNames('react-trello-lane', this.props.className || '')
@@ -263,11 +277,12 @@ class Lane extends Component {
     return (
       <components.Section
         {...otherProps}
+        droppable={droppable ? 'true' : undefined}
         key={id}
         onClick={() => onLaneClick && onLaneClick(id)}
         draggable={false}
         className={allClassNames}>
-        {this.renderHeader({id, cards, ...otherProps})}
+        {this.renderHeader({id, cards, labelStyle, titleStyle, canAddLanes, laneDraggable, t, ...otherProps})}
         {this.renderDragContainer(isDraggingOver)}
         {loading && <components.Loader />}
         {showFooter && <components.LaneFooter onClick={this.toggleLaneCollapsed} collapsed={collapsed} />}
@@ -328,4 +343,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(laneActions, dispatch)
 })
 
-export default connect(null, mapDispatchToProps)(Lane)
+export default connect(
+  null,
+  mapDispatchToProps
+)(Lane)

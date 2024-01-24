@@ -112,12 +112,12 @@ export const Section = styled.section`
 export const LaneHeader = styled(Header)`
   margin-bottom: 0px;
   ${props =>
-    props.editLaneTitle &&
+    props.editlanetitle &&
     css`
       padding: 0px;
       line-height: 30px;
     `} ${props =>
-    !props.editLaneTitle &&
+    !props.editlanetitle &&
     css`
       padding: 0px 5px;
     `};

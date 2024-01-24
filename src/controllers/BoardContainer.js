@@ -1,13 +1,13 @@
+import isEqual from 'lodash/isEqual'
+import pick from 'lodash/pick'
+import PropTypes from 'prop-types'
 import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
+import {PopoverWrapper} from 'react-popopo'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import Container from 'rt/dnd/Container'
 import Draggable from 'rt/dnd/Draggable'
-import PropTypes from 'prop-types'
-import pick from 'lodash/pick'
-import isEqual from 'lodash/isEqual'
 import Lane from './Lane'
-import { PopoverWrapper } from 'react-popopo'
 
 import * as boardActions from 'rt/actions/BoardActions'
 import * as laneActions from 'rt/actions/LaneActions'
@@ -136,6 +136,15 @@ class BoardContainer extends Component {
       laneStyle,
       onCardMoveAcrossLanes,
       t,
+      handleLaneDragEnd,
+      handleDragStart,
+      handleDragEnd,
+      hideCardDeleteIcon,
+      collapsibleLanes,
+      cardDraggable,
+      cardDragClass,
+      editLaneTitle,
+      handleLaneDragStart,
       ...otherProps
     } = this.props
 
@@ -204,8 +213,10 @@ class BoardContainer extends Component {
         </PopoverWrapper>
         {canAddLanes && (
           <Container orientation="horizontal">
-            {editable && !addLaneMode ? <components.NewLaneSection t={t} onClick={this.showEditableLane} /> : (
-              addLaneMode && <components.NewLaneForm onCancel={this.hideEditableLane} onAdd={this.addNewLane} t={t}/>
+            {editable && !addLaneMode ? (
+              <components.NewLaneSection t={t} onClick={this.showEditableLane} />
+            ) : (
+              addLaneMode && <components.NewLaneForm onCancel={this.hideEditableLane} onAdd={this.addNewLane} t={t} />
             )}
           </Container>
         )}
@@ -250,11 +261,11 @@ BoardContainer.propTypes = {
   laneDragClass: PropTypes.string,
   laneDropClass: PropTypes.string,
   onCardMoveAcrossLanes: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired
 }
 
 BoardContainer.defaultProps = {
-  t: v=>v,
+  t: v => v,
   onDataChange: () => {},
   handleDragStart: () => {},
   handleDragEnd: () => {},
