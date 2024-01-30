@@ -1,6 +1,6 @@
 {
   "name": "@ObeoNetwork/react-trello",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "Pluggable components to add a trello like kanban board to your application",
   "main": "dist/index.js",
   "files": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "prepublish": "npm run build",
-    "storybook": "start-storybook -p 9002",
+    "storybook": "export NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 9002",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cover": "istanbul cover -x *.test.js _mocha -- -R spec --require tests/config/setup 'tests/**/*.test.js'",

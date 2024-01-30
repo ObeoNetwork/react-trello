@@ -270,6 +270,7 @@ class Lane extends Component {
       t,
       droppable,
       editable,
+      editLaneTitle,
       ...otherProps
     } = this.props
     const allClassNames = classNames('react-trello-lane', this.props.className || '')
@@ -282,7 +283,17 @@ class Lane extends Component {
         onClick={() => onLaneClick && onLaneClick(id)}
         draggable={false}
         className={allClassNames}>
-        {this.renderHeader({id, cards, labelStyle, titleStyle, canAddLanes, laneDraggable, t, ...otherProps})}
+        {this.renderHeader({
+          id,
+          cards,
+          labelStyle,
+          titleStyle,
+          canAddLanes,
+          laneDraggable,
+          t,
+          editLaneTitle,
+          ...otherProps
+        })}
         {this.renderDragContainer(isDraggingOver)}
         {loading && <components.Loader />}
         {showFooter && <components.LaneFooter onClick={this.toggleLaneCollapsed} collapsed={collapsed} />}
