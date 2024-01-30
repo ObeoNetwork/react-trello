@@ -17,7 +17,7 @@ class Lane extends Component {
     loading: false,
     currentPage: this.props.currentPage,
     addCardMode: false,
-    collapsed: false,
+    collapsed: this.props.collapsed,
     isDraggingOver: false
   }
 
@@ -235,7 +235,7 @@ class Lane extends Component {
   }
 
   toggleLaneCollapsed = () => {
-    this.props.collapsibleLanes && this.setState(state => ({collapsed: !state.collapsed}))
+    this.props.collapsible && this.setState(state => ({collapsed: !state.collapsed}))
   }
 
   render() {
@@ -243,7 +243,7 @@ class Lane extends Component {
     const {
       id,
       cards,
-      collapsibleLanes,
+      collapsible,
       components,
       onLaneClick,
       onLaneScroll,
@@ -271,10 +271,11 @@ class Lane extends Component {
       droppable,
       editable,
       editLaneTitle,
+      collapsed: collapsedProps,
       ...otherProps
     } = this.props
     const allClassNames = classNames('react-trello-lane', this.props.className || '')
-    const showFooter = collapsibleLanes && cards.length > 0
+    const showFooter = collapsible && cards.length > 0
     return (
       <components.Section
         {...otherProps}
@@ -318,7 +319,8 @@ Lane.propTypes = {
   label: PropTypes.string,
   currentPage: PropTypes.number,
   draggable: PropTypes.bool,
-  collapsibleLanes: PropTypes.bool,
+  collapsible: PropTypes.bool,
+  collapsed: PropTypes.bool,
   droppable: PropTypes.bool,
   onCardMoveAcrossLanes: PropTypes.func,
   onCardClick: PropTypes.func,

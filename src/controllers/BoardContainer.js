@@ -165,7 +165,6 @@ class BoardContainer extends Component {
       'draggable',
       'laneDraggable',
       'cardDraggable',
-      'collapsibleLanes',
       'canAddLanes',
       'hideCardDeleteIcon',
       'tagStyle',
@@ -189,7 +188,7 @@ class BoardContainer extends Component {
             getChildPayload={index => this.getLaneDetails(index)}
             groupName={this.groupName}>
             {reducerData.lanes.map((lane, index) => {
-              const {id, droppable, ...otherProps} = lane
+              const {id, droppable, collapsible, collapsed, ...otherProps} = lane
               const laneToRender = (
                 <Lane
                   key={id}
@@ -203,6 +202,8 @@ class BoardContainer extends Component {
                   labelStyle={lane.labelStyle || {}}
                   cardStyle={this.props.cardStyle || lane.cardStyle}
                   editable={editable && !lane.disallowAddingCard}
+                  collapsible={collapsibleLanes || collapsible}
+                  collapsed={collapsed}
                   {...otherProps}
                   {...passthroughProps}
                 />
