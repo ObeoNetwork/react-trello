@@ -235,7 +235,11 @@ class Lane extends Component {
   }
 
   toggleLaneCollapsed = () => {
-    this.props.collapsible && this.setState(state => ({collapsed: !state.collapsed}))
+    if (this.props.collapsible) {
+      const {collapsed} = this.state
+      this.props.onLaneCollapseUpdate(this.props.id, !collapsed)
+      this.setState(state => ({collapsed: !state.collapsed}))
+    }
   }
 
   render() {
@@ -330,6 +334,7 @@ Lane.propTypes = {
   onCardUpdate: PropTypes.func,
   onLaneDelete: PropTypes.func,
   onLaneUpdate: PropTypes.func,
+  onLaneCollapseUpdate: PropTypes.func,
   onLaneClick: PropTypes.func,
   onLaneScroll: PropTypes.func,
   editable: PropTypes.bool,
@@ -348,6 +353,7 @@ Lane.defaultProps = {
   label: undefined,
   editable: false,
   onLaneUpdate: () => {},
+  onLaneCollapseUpdate: () => {},
   onCardAdd: () => {},
   onCardUpdate: () => {}
 }
