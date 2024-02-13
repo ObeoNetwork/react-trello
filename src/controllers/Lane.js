@@ -163,29 +163,31 @@ class Lane extends Component {
     const showableCards = collapsed ? [] : cards
 
     const cardList = this.sortCards(showableCards, laneSortFunction).map((card, idx) => {
-      const onDeleteCard = () => this.removeCard(card.id)
-      const cardToRender = (
-        <components.Card
-          key={card.id}
-          index={idx}
-          style={card.style || cardStyle}
-          className="react-trello-card"
-          onDelete={onDeleteCard}
-          onClick={e => this.handleCardClick(e, card)}
-          onChange={updatedCard => this.updateCard(updatedCard)}
-          showDeleteButton={!hideCardDeleteIcon}
-          tagStyle={tagStyle}
-          cardDraggable={cardDraggable}
-          editable={editable}
-          t={t}
-          {...card}
-        />
-      )
-      return cardDraggable && (!card.hasOwnProperty('draggable') || card.draggable) ? (
-        <Draggable key={card.id}>{cardToRender}</Draggable>
-      ) : (
-        <span key={card.id}>{cardToRender}</span>
-      )
+      if (card.visible || card.visible === undefined) {
+        const onDeleteCard = () => this.removeCard(card.id)
+        const cardToRender = (
+          <components.Card
+            key={card.id}
+            index={idx}
+            style={card.style || cardStyle}
+            className="react-trello-card"
+            onDelete={onDeleteCard}
+            onClick={e => this.handleCardClick(e, card)}
+            onChange={updatedCard => this.updateCard(updatedCard)}
+            showDeleteButton={!hideCardDeleteIcon}
+            tagStyle={tagStyle}
+            cardDraggable={cardDraggable}
+            editable={editable}
+            t={t}
+            {...card}
+          />
+        )
+        return cardDraggable && (!card.hasOwnProperty('draggable') || card.draggable) ? (
+          <Draggable key={card.id}>{cardToRender}</Draggable>
+        ) : (
+          <span key={card.id}>{cardToRender}</span>
+        )
+      }
     })
 
     return (
