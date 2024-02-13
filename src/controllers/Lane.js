@@ -163,9 +163,9 @@ class Lane extends Component {
     const showableCards = collapsed ? [] : cards
 
     const cardList = this.sortCards(showableCards, laneSortFunction).map((card, idx) => {
-      if (card.visible || card.visible === undefined) {
-        const onDeleteCard = () => this.removeCard(card.id)
-        const cardToRender = (
+      const onDeleteCard = () => this.removeCard(card.id)
+      const cardToRender =
+        card.visible || card.visible === undefined ? (
           <components.Card
             key={card.id}
             index={idx}
@@ -181,13 +181,12 @@ class Lane extends Component {
             t={t}
             {...card}
           />
-        )
-        return cardDraggable && (!card.hasOwnProperty('draggable') || card.draggable) ? (
-          <Draggable key={card.id}>{cardToRender}</Draggable>
-        ) : (
-          <span key={card.id}>{cardToRender}</span>
-        )
-      }
+        ) : null
+      return cardDraggable && (!card.hasOwnProperty('draggable') || card.draggable) ? (
+        <Draggable key={card.id}>{cardToRender}</Draggable>
+      ) : (
+        <span key={card.id}>{cardToRender}</span>
+      )
     })
 
     return (
@@ -278,6 +277,7 @@ class Lane extends Component {
       editable,
       editLaneTitle,
       collapsed: collapsedProps,
+      onLaneCollapseUpdate,
       ...otherProps
     } = this.props
     const allClassNames = classNames('react-trello-lane', this.props.className || '')
