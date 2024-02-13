@@ -156,7 +156,8 @@ class Lane extends Component {
       tagStyle,
       cardStyle,
       components,
-      t
+      t,
+      getGhostParent
     } = this.props
     const {addCardMode, collapsed} = this.state
 
@@ -201,7 +202,8 @@ class Lane extends Component {
           onDragEnter={() => this.setState({isDraggingOver: true})}
           onDragLeave={() => this.setState({isDraggingOver: false})}
           shouldAcceptDrop={this.shouldAcceptDrop}
-          getChildPayload={index => this.props.getCardDetails(id, index)}>
+          getChildPayload={index => this.props.getCardDetails(id, index)}
+          getGhostParent={getGhostParent ? getGhostParent : undefined}>
           {cardList}
         </Container>
         {editable && !addCardMode && <components.AddCardLink onClick={this.showEditableCard} t={t} laneId={id} />}
@@ -278,6 +280,7 @@ class Lane extends Component {
       editLaneTitle,
       collapsed: collapsedProps,
       onLaneCollapseUpdate,
+      getGhostParent,
       ...otherProps
     } = this.props
     const allClassNames = classNames('react-trello-lane', this.props.className || '')
@@ -345,7 +348,8 @@ Lane.propTypes = {
   cardDragClass: PropTypes.string,
   cardDropClass: PropTypes.string,
   canAddLanes: PropTypes.bool,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  getGhostParent: PropTypes.func
 }
 
 Lane.defaultProps = {

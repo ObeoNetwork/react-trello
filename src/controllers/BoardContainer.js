@@ -146,6 +146,7 @@ class BoardContainer extends Component {
       editLaneTitle,
       handleLaneDragStart,
       onLaneCollapseUpdate,
+      getGhostParent,
       ...otherProps
     } = this.props
 
@@ -174,7 +175,8 @@ class BoardContainer extends Component {
       'handleDragEnd',
       'cardDragClass',
       'editLaneTitle',
-      't'
+      't',
+      'getGhostParent'
     ])
 
     return (
@@ -188,6 +190,7 @@ class BoardContainer extends Component {
             onDrop={this.onLaneDrop}
             lockAxis="x"
             getChildPayload={index => this.getLaneDetails(index)}
+            getGhostParent={getGhostParent ? getGhostParent : undefined}
             groupName={this.groupName}>
             {reducerData.lanes.map((lane, index) => {
               const {id, droppable, collapsible, collapsed, ...otherProps} = lane
@@ -265,7 +268,8 @@ BoardContainer.propTypes = {
   laneDragClass: PropTypes.string,
   laneDropClass: PropTypes.string,
   onCardMoveAcrossLanes: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  getGhostParent: PropTypes.func
 }
 
 BoardContainer.defaultProps = {
