@@ -145,6 +145,7 @@ class BoardContainer extends Component {
       cardDragClass,
       editLaneTitle,
       handleLaneDragStart,
+      onLaneCollapseUpdate,
       ...otherProps
     } = this.props
 
