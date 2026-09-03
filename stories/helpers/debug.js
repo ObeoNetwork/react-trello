@@ -1,5 +1,5 @@
 export default (message) => {
-  if (process.env.NODE_ENV === 'test') { return }
+  if (import.meta.env.MODE === 'test') { return }
   if (typeof message === 'object') {
     console.dir(message)
   } else {
