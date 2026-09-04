@@ -29,18 +29,11 @@ Pluggable components to add a Trello (like) kanban board to your application
 
 ## Getting Started
 
-Install using npm or yarn
+Install using npm
 
 ```bash
 $ npm install --save react-trello
 ```
-
-or
-
-```bash
-$ yarn add react-trello
-```
-
 
 ## Usage
 
@@ -339,24 +332,22 @@ Pass environment variable `REDUX_LOGGING` as true to enable Redux logging in any
 
 ```
 cd react-trello/
-yarn install
-yarn run storybook
+npm install
+npm run test:install-browser
+npm run storybook
 ```
 
 ### Scripts
 
-1.  `yarn run lint` : Lint all js files
-2.  `yarn run lintfix` : fix linting errors of all js files
-3.  `yarn run semantic-release` : make a release. Leave it for CI to do.
-4.  `yarn run storybook`: Start developing by using storybook
-5.  `yarn run test` : Run tests. tests file should be written as `*.test.js` and using ES2015
-6.  `yarn run test:watch` : Watch tests while writing
-7.  `yarn run test:cover` : Show coverage report of your tests
-8.  `yarn run test:report` : Report test coverage to codecov.io. Leave this for CI
-9.  `yarn run build`: transpile all ES6 component files into ES5(commonjs) and put it in `dist` directory
-10. `yarn run docs`: create static build of storybook in `docs` directory that can be used for github pages
+1. `npm run storybook`: start Storybook with the Vite builder
+2. `npm run test:install-browser`: install the Chromium runtime used by Storybook tests
+3. `npm test`: run every story as a Vitest browser test
+4. `npm run test:watch`: rerun story tests while developing
+5. `npm run coverage`: run story tests and create text and HTML coverage reports
+6. `npm run build`: create ES and CommonJS library bundles with Vite
+7. `npm run docs`: create a static Storybook build in `docs`
 
-Learn how to write stories [here](https://storybook.js.org/basics/writing-stories/)
+Learn how to write stories [here](https://storybook.js.org/docs/writing-stories/)
 
 ### Maintainers
 

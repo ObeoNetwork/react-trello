@@ -1,13 +1,17 @@
 // i18next support structure
 
+import en from './en/translation.json'
+import ru from './ru/translation.json'
+import ptBr from './pt-br/translation.json'
+
 export default {
   "en": {
-    translation: require('./en/translation.json')
+    translation: en
   },
   "ru": {
-    translation: require('./ru/translation.json')
+    translation: ru
   },
   "pt-br": {
-    translation: require('./pt-br/translation.json')
+    translation: ptBr
   }
 }
