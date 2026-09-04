@@ -25,15 +25,15 @@ class BoardContainer extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    // nextProps.data changes when external Board input props change and nextProps.reducerData changes due to event bus or UI changes
+  componentDidUpdate(prevProps) {
+    // data changes when external Board input props change and reducerData changes due to event bus or UI changes
     const {data, reducerData, onDataChange} = this.props
-    if (nextProps.reducerData && !isEqual(reducerData, nextProps.reducerData)) {
-      onDataChange(nextProps.reducerData)
+    if (reducerData && !isEqual(prevProps.reducerData, reducerData)) {
+      onDataChange(reducerData)
     }
-    if (nextProps.data && !isEqual(nextProps.data, data)) {
-      this.props.actions.loadBoard(nextProps.data)
-      onDataChange(nextProps.data)
+    if (data && !isEqual(prevProps.data, data)) {
+      this.props.actions.loadBoard(data)
+      onDataChange(data)
     }
   }
 
@@ -111,8 +111,10 @@ class BoardContainer extends Component {
   render() {
     const {
       id,
+      actions,
       components,
       reducerData,
+      eventBusHandle,
       draggable,
       laneDraggable,
       laneDragClass,
@@ -132,6 +134,9 @@ class BoardContainer extends Component {
       editable,
       canAddLanes,
       laneStyle,
+      cardStyle,
+      tagStyle,
+      laneSortFunction,
       onCardMoveAcrossLanes,
       t,
       handleLaneDragEnd,
@@ -141,10 +146,17 @@ class BoardContainer extends Component {
       collapsibleLanes,
       cardDraggable,
       cardDragClass,
+      cardDropClass,
       editLaneTitle,
       handleLaneDragStart,
       onLaneCollapseUpdate,
       getGhostParent,
+      addCardLink,
+      customLaneHeader,
+      newLaneTemplate,
+      newCardTemplate,
+      customCardLayout,
+      children,
       ...otherProps
     } = this.props
 

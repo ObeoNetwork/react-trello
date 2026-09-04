@@ -36,13 +36,17 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 
-export const CustomPopoverContainer = styled(PopoverContainer)`
+export const CustomPopoverContainer = styled(PopoverContainer).withConfig({
+  shouldForwardProp: prop => prop !== 'active'
+})`
   position: absolute;
   right: 10px;
   flex-flow: column nowrap;
 `
 
-export const CustomPopoverContent = styled(PopoverContent)`
+export const CustomPopoverContent = styled(PopoverContent).withConfig({
+  shouldForwardProp: prop => prop !== 'active'
+})`
   visibility: hidden;
   margin-top: -5px;
   opacity: 0;
@@ -112,12 +116,12 @@ export const Section = styled.section`
 export const LaneHeader = styled(Header)`
   margin-bottom: 0px;
   ${props =>
-    props.editlanetitle &&
+    props.$editLaneTitle &&
     css`
       padding: 0px;
       line-height: 30px;
-    `} ${props =>
-    !props.editlanetitle &&
+  `} ${props =>
+    !props.$editLaneTitle &&
     css`
       padding: 0px 5px;
     `};
@@ -280,7 +284,7 @@ export const InlineInput = styled.textarea`
   padding: 0 8px;
   outline: 0;
   ${props =>
-    props.border &&
+    props.$border &&
     css`
       &:focus {
         box-shadow: inset 0 0 0 2px #0079bf;

@@ -57,10 +57,10 @@ class Lane extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props.cards, nextProps.cards)) {
+  componentDidUpdate(prevProps) {
+    if (!isEqual(prevProps.cards, this.props.cards)) {
       this.setState({
-        currentPage: nextProps.currentPage
+        currentPage: this.props.currentPage
       })
     }
   }
@@ -249,7 +249,16 @@ class Lane extends Component {
     const {loading, isDraggingOver, collapsed} = this.state
     const {
       id,
+      actions,
+      index,
       cards,
+      title,
+      label,
+      style,
+      className,
+      laneSortFunction,
+      cardStyle,
+      tagStyle,
       collapsible,
       components,
       onLaneClick,
@@ -267,6 +276,7 @@ class Lane extends Component {
       hideCardDeleteIcon,
       cardDraggable,
       cardDragClass,
+      cardDropClass,
       boardId,
       getCardDetails,
       labelStyle,
@@ -277,6 +287,7 @@ class Lane extends Component {
       t,
       droppable,
       editable,
+      disallowAddingCard,
       editLaneTitle,
       collapsed: collapsedProps,
       onLaneCollapseUpdate,
@@ -288,6 +299,7 @@ class Lane extends Component {
     return (
       <components.Section
         {...otherProps}
+        style={style}
         droppable={droppable ? 'true' : undefined}
         key={id}
         onClick={() => onLaneClick && onLaneClick(id)}
@@ -296,6 +308,8 @@ class Lane extends Component {
         {this.renderHeader({
           id,
           cards,
+          title,
+          label,
           labelStyle,
           titleStyle,
           canAddLanes,
