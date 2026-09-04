@@ -5,11 +5,11 @@ import InlineInput from 'rt/widgets/InlineInput'
 import LaneMenu from './LaneHeader/LaneMenu'
 
 const LaneHeaderComponent = ({
-  updateTitle,
-  canAddLanes,
+  updateTitle = () => {},
+  canAddLanes = false,
   onDelete,
   onDoubleClick,
-  editLaneTitle,
+  editLaneTitle = false,
   label,
   title,
   titleStyle,
@@ -18,7 +18,7 @@ const LaneHeaderComponent = ({
   laneDraggable
 }) => {
   return (
-    <LaneHeader onDoubleClick={onDoubleClick} editlanetitle={editLaneTitle ? editLaneTitle.toString() : undefined}>
+    <LaneHeader onDoubleClick={onDoubleClick} $editLaneTitle={editLaneTitle}>
       <Title draggable={laneDraggable} style={titleStyle}>
         {editLaneTitle ? (
           <InlineInput
@@ -52,12 +52,6 @@ LaneHeaderComponent.propTypes = {
   onDelete: PropTypes.func,
   onDoubleClick: PropTypes.func,
   t: PropTypes.func.isRequired
-}
-
-LaneHeaderComponent.defaultProps = {
-  updateTitle: () => {},
-  editLaneTitle: false,
-  canAddLanes: false
 }
 
 export default LaneHeaderComponent

@@ -50,17 +50,16 @@ class NewLaneTitleEditor extends React.Component {
   }
 
   render() {
-    const {autoFocus, resize, border, autoResize, value, placeholder} = this.props
+    const {autoFocus, resize, border, value, placeholder} = this.props
 
     return <InlineInput
       style={{resize: resize}}
       ref={this.setRef}
-      border={border}
+      $border={border}
       onKeyDown={this.onKeyDown}
       placeholder={value.length == 0 ? undefined : placeholder}
       defaultValue={value}
       rows={3}
-      autoResize={autoResize}
       autoFocus={autoFocus}
     />
   }

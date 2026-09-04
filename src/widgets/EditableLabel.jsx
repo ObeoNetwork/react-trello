@@ -56,7 +56,9 @@ class EditableLabel extends React.Component {
     const placeholder = this.props.value.length > 0 ? false : this.props.placeholder;
     return (
       <div
-        ref={ref => (this.refDiv = ref)}
+        ref={ref => {
+          this.refDiv = ref
+        }}
         contentEditable="true"
         className={this.getClassName()}
         onPaste={this.onPaste}

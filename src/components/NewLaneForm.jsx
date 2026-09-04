@@ -29,7 +29,9 @@ class NewLane extends Component {
         <Section>
           <LaneTitle>
             <NewLaneTitleEditor
-              ref={ref => (this.refInput = ref)}
+              ref={ref => {
+                this.refInput = ref
+              }}
               placeholder={t('placeholder.title')}
               onCancel={this.props.onCancel}
               onSave={this.handleSubmit}

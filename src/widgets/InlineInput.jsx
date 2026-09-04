@@ -53,8 +53,10 @@ class InlineInputController extends React.Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setValue(nextProps.value)
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      this.setValue(this.props.value)
+    }
   }
 
   render() {
@@ -62,7 +64,7 @@ class InlineInputController extends React.Component {
 
     return <InlineInput
       ref={this.setRef}
-      border={border}
+      $border={border}
       onMouseDown={this.onMouseDown}
       onFocus={this.onFocus}
       onBlur={this.onBlur}
@@ -73,7 +75,7 @@ class InlineInputController extends React.Component {
       autoCorrect="off"
       autoCapitalize="off"
       spellCheck="false"
-      dataGramm="false"
+      data-gramm="false"
       rows={1}
       autoFocus={autoFocus}
     />
