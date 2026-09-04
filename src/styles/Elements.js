@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {CardWrapper, MovableCardWrapper} from './Base'
 
 export const DeleteWrapper = styled.div`

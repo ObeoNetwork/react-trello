@@ -23,7 +23,7 @@ export default defineConfig(() => ({
       name: 'ReactTrello',
       entry: path.resolve(dirname, 'src/index.jsx'),
       formats: ['es', 'cjs'],
-      fileName: format => `react-trello.${format}.js`
+      fileName: format => (format === 'es' ? 'react-trello.js' : 'react-trello.cjs')
     },
     rollupOptions: {
       external: isExternal
