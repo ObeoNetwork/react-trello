@@ -1,9 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  useRole
+} from '@floating-ui/react'
+import React, {useState} from 'react'
 
-import { Popover } from 'react-popopo'
-
-import { CustomPopoverContent, CustomPopoverContainer } from 'rt/styles/Base'
+import {CustomPopoverContent, CustomPopoverContainer} from 'rt/styles/Base'
 
 import {
   LaneMenuTitle,
@@ -15,20 +23,46 @@ import {
   MenuButton,
 } from 'rt/styles/Elements'
 
-const TEST= PropTypes.elementType;
+const LaneMenu = ({t, onDelete}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const {context, floatingStyles, refs} = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: 'bottom-end',
+    middleware: [offset(5), flip(), shift({padding: 5})],
+    whileElementsMounted: autoUpdate
+  })
+  const click = useClick(context, {event: 'mousedown'})
+  const dismiss = useDismiss(context)
+  const role = useRole(context, {role: 'menu'})
+  const {getFloatingProps, getReferenceProps} = useInteractions([click, dismiss, role])
 
-const LaneMenu = ({t, onDelete}) => (
-  <Popover position="bottom" PopoverContainer={CustomPopoverContainer} PopoverContent={CustomPopoverContent} trigger={<MenuButton>⋮</MenuButton>}>
-    <LaneMenuHeader>
-      <LaneMenuTitle>{t('Lane actions')}</LaneMenuTitle>
-      <DeleteWrapper>
-        <GenDelButton>&#10006;</GenDelButton>
-      </DeleteWrapper>
-    </LaneMenuHeader>
-    <LaneMenuContent>
-      <LaneMenuItem onClick={onDelete}>{t('Delete lane')}</LaneMenuItem>
-    </LaneMenuContent>
-  </Popover>
-)
+  return (
+    <>
+      <MenuButton ref={refs.setReference} aria-label={t('Lane actions')} {...getReferenceProps()}>
+        ⋮
+      </MenuButton>
+      {isOpen && (
+        <CustomPopoverContainer ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+          <CustomPopoverContent>
+            <LaneMenuHeader>
+              <LaneMenuTitle>{t('Lane actions')}</LaneMenuTitle>
+              <DeleteWrapper>
+                <GenDelButton aria-label="Close" onClick={() => setIsOpen(false)}>
+                  &#10006;
+                </GenDelButton>
+              </DeleteWrapper>
+            </LaneMenuHeader>
+            <LaneMenuContent>
+              <LaneMenuItem role="menuitem" tabIndex={0} onClick={onDelete}>
+                {t('Delete lane')}
+              </LaneMenuItem>
+            </LaneMenuContent>
+          </CustomPopoverContent>
+        </CustomPopoverContainer>
+      )}
+    </>
+  )
+}
 
-export default LaneMenu;
+export default LaneMenu
