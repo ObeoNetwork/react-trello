@@ -2,7 +2,6 @@ import isEqual from 'lodash/isEqual'
 import pick from 'lodash/pick'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
-import {PopoverWrapper} from 'react-popopo'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import Container from 'rt/dnd/Container'
@@ -191,42 +190,40 @@ class BoardContainer extends Component {
 
     return (
       <components.BoardWrapper style={style} {...otherProps} draggable={false}>
-        <PopoverWrapper>
-          <Container
-            orientation="horizontal"
-            onDragStart={this.onDragStart}
-            dragClass={laneDragClass}
-            dropClass={laneDropClass}
-            onDrop={this.onLaneDrop}
-            lockAxis="x"
-            getChildPayload={index => this.getLaneDetails(index)}
-            getGhostParent={getGhostParent ? getGhostParent : undefined}
-            groupName={this.groupName}>
-            {reducerData.lanes.map((lane, index) => {
-              const {id, droppable, collapsible, collapsed, ...otherProps} = lane
-              const laneToRender = (
-                <Lane
-                  key={id}
-                  boardId={this.groupName}
-                  components={components}
-                  id={id}
-                  getCardDetails={this.getCardDetails}
-                  index={index}
-                  droppable={droppable === undefined ? true : droppable}
-                  style={laneStyle || lane.style || {}}
-                  labelStyle={lane.labelStyle || {}}
-                  cardStyle={this.props.cardStyle || lane.cardStyle}
-                  editable={editable && !lane.disallowAddingCard}
-                  collapsible={collapsibleLanes || collapsible}
-                  collapsed={collapsed}
-                  {...otherProps}
-                  {...passthroughProps}
-                />
-              )
-              return draggable && laneDraggable ? <Draggable key={lane.id}>{laneToRender}</Draggable> : laneToRender
-            })}
-          </Container>
-        </PopoverWrapper>
+        <Container
+          orientation="horizontal"
+          onDragStart={this.onDragStart}
+          dragClass={laneDragClass}
+          dropClass={laneDropClass}
+          onDrop={this.onLaneDrop}
+          lockAxis="x"
+          getChildPayload={index => this.getLaneDetails(index)}
+          getGhostParent={getGhostParent ? getGhostParent : undefined}
+          groupName={this.groupName}>
+          {reducerData.lanes.map((lane, index) => {
+            const {id, droppable, collapsible, collapsed, ...otherProps} = lane
+            const laneToRender = (
+              <Lane
+                key={id}
+                boardId={this.groupName}
+                components={components}
+                id={id}
+                getCardDetails={this.getCardDetails}
+                index={index}
+                droppable={droppable === undefined ? true : droppable}
+                style={laneStyle || lane.style || {}}
+                labelStyle={lane.labelStyle || {}}
+                cardStyle={this.props.cardStyle || lane.cardStyle}
+                editable={editable && !lane.disallowAddingCard}
+                collapsible={collapsibleLanes || collapsible}
+                collapsed={collapsed}
+                {...otherProps}
+                {...passthroughProps}
+              />
+            )
+            return draggable && laneDraggable ? <Draggable key={lane.id}>{laneToRender}</Draggable> : laneToRender
+          })}
+        </Container>
         {canAddLanes && (
           <Container orientation="horizontal">
             {editable && !addLaneMode ? (

@@ -39,7 +39,7 @@
     "immutability-helper": "^2.8.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
-    "react-popopo": "^2.1.9",
+    "@floating-ui/react": "0.27.16",
     "react-redux": "^9.3.0",
     "redux": "^5.0.1",
     "redux-actions": "^2.6.1",
