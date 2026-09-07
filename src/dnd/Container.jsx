@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import container, {dropHandlers} from 'trello-smooth-dnd'
+import * as smoothDnd from 'trello-smooth-dnd'
+
+// trello-smooth-dnd@1.0.0 publishes a legacy UMD bundle. Depending on the
+// bundler, its callable default export can be nested under `default`.
+const smoothDndExports = smoothDnd.default || smoothDnd
+const container = typeof smoothDndExports === 'function' ? smoothDndExports : smoothDndExports.default
+const dropHandlers = smoothDnd.dropHandlers || smoothDndExports.dropHandlers
 
 container.dropHandler = dropHandlers.reactDropHandler().handler;
 container.wrapChild = p => p; // dont wrap children they will already be wrapped
@@ -19,14 +25,18 @@ class Container extends Component {
 	}
 
 	componentWillUnmount() {
-		this.container.dispose();
+		if (this.container) {
+			this.container.dispose();
+		}
 		this.container = null;
 	}
 
 	componentDidUpdate() {
 		if (this.containerDiv) {
 			if (this.prevContainer && this.prevContainer !== this.containerDiv) {
-				this.container.dispose();
+				if (this.container) {
+					this.container.dispose();
+				}
 				this.container = container(this.containerDiv, this.getContainerOptions());
 				this.prevContainer = this.containerDiv;
 			}

@@ -20,7 +20,8 @@ export {
   Lane,
   createTranslate,
   locales,
-  widgets
+  widgets,
+  Board
 }
 
 export { DefaultComponents as components }

@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle, css} from 'styled-components'
+import {createGlobalStyle, css, styled} from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
   .comPlainTextContentEditable {

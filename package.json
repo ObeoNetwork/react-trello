@@ -2,10 +2,20 @@
   "name": "@ObeoNetwork/react-trello",
   "version": "2.4.11",
   "description": "Pluggable components to add a trello like kanban board to your application",
-  "main": "dist/react-trello.cjs.js",
-  "module": "dist/react-trello.es.js",
+  "type": "module",
+  "types": "./index.d.ts",
+  "main": "./dist/react-trello.cjs",
+  "module": "./dist/react-trello.js",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./dist/react-trello.js",
+      "require": "./dist/react-trello.cjs"
+    }
+  },
   "files": [
     "dist",
+    "index.d.ts",
     "README"
   ],
   "scripts": {
