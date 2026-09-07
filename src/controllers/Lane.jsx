@@ -1,6 +1,6 @@
 import classNames from 'classnames'
-import cloneDeep from 'lodash/cloneDeep'
-import isEqual from 'lodash/isEqual'
+import cloneDeep from 'lodash/cloneDeep.js'
+import isEqual from 'lodash/isEqual.js'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'

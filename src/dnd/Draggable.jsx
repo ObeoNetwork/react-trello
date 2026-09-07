@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
-import {constants} from 'trello-smooth-dnd'
+import * as smoothDnd from 'trello-smooth-dnd'
+
+const smoothDndExports = smoothDnd.default || smoothDnd
+const {constants} = smoothDnd.constants ? smoothDnd : smoothDndExports
 const {wrapperClass} = constants
 
 class Draggable extends Component {

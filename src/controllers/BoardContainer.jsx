@@ -1,5 +1,5 @@
-import isEqual from 'lodash/isEqual'
-import pick from 'lodash/pick'
+import isEqual from 'lodash/isEqual.js'
+import pick from 'lodash/pick.js'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
