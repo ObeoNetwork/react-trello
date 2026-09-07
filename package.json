@@ -1,6 +1,6 @@
 {
   "name": "@ObeoNetwork/react-trello",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Pluggable components to add a trello like kanban board to your application",
   "type": "module",
   "types": "./index.d.ts",
