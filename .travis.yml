@@ -5,7 +5,7 @@ cache:
 notifications:
   email: true
 node_js:
-  - '22.22.0'
+  - '24.20.0'
 after_success:
   - npx semantic-release
 branches:

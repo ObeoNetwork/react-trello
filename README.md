@@ -32,7 +32,7 @@ Pluggable components to add a Trello (like) kanban board to your application
 Install using npm
 
 ```bash
-$ npm install --save react-trello
+$ npm install --save @obeonetwork/react-trello
 ```
 
 ## Usage
